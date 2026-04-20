@@ -1,0 +1,73 @@
+# ============ 项目专属忽略 ============
+# 课程汇报相关材料不入库
+/docs/
+# 成员邮箱清单不入库
+/emails.txt
+# Claude Code 本地配置
+/.claude/
+# 内部脚本
+/_ci.sh
+
+# ============ Java / Maven / Spring Boot ============
+server/target/
+**/target/
+*.jar
+*.war
+*.ear
+*.class
+hs_err_pid*
+replay_pid*
+.mvn/wrapper/maven-wrapper.jar
+
+# ============ Gradle / Android ============
+android/.gradle/
+android/build/
+android/app/build/
+android/captures/
+android/local.properties
+android/.idea/
+android/.kotlin/
+*.apk
+*.aab
+*.aar
+*.dex
+*.ap_
+
+# ============ IDE ============
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.trae/
+out/
+.settings/
+.project
+.classpath
+
+# ============ OS ============
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ============ 日志与临时文件 ============
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+logs/
+out/
+server/out/
+
+# ============ 数据库 / 上传文件 ============
+*.db
+*.sqlite
+uploads/
+minio-data/
+mysql-data/
+
+# ============ 测试覆盖率 ============
+coverage/
+*.lcov
