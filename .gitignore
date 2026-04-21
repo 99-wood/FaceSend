@@ -18,6 +18,7 @@ server/target/
 hs_err_pid*
 replay_pid*
 .mvn/wrapper/maven-wrapper.jar
+!android/gradle/wrapper/gradle-wrapper.jar
 
 # ============ Gradle / Android ============
 android/.gradle/
