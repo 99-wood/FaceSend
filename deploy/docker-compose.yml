@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: facesend-mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      volumes:
+        - mysql-data:/var/lib/mysql
+    networks:
+      - facesend-net
+
+  minio:
+    image: minio/minio
+    container_name: facesend-minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - facesend-net
+
+  facesend-server:
+    image: openjdk:21-jdk-slim
+    container_name: facesend-server
+    restart: always
+    ports:
+      - "8080:8080"
+    working_dir: /app
+    volumes:
+      - ./server/target:/app
+    command: ["java", "-jar", "facesend-server.jar"]
+    depends_on:
+      - mysql
+      - minio
+    networks:
+      - facesend-net
+
+volumes:
+  mysql-data:
+  minio-data:
+
+networks:
+  facesend-net:
+    driver: bridge
