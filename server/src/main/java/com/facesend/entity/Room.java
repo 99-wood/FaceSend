@@ -34,6 +34,9 @@ public class Room {
     @Column
     private Double longitude;
 
+    @Column(name = "allow_member_upload", nullable = false)
+    private Boolean allowMemberUpload = false;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -63,4 +66,6 @@ public class Room {
     public void setLatitude(Double latitude) { this.latitude = latitude; }
     public Double getLongitude() { return longitude; }
     public void setLongitude(Double longitude) { this.longitude = longitude; }
+    public Boolean getAllowMemberUpload() { return allowMemberUpload; }
+    public void setAllowMemberUpload(Boolean allowMemberUpload) { this.allowMemberUpload = allowMemberUpload; }
 }

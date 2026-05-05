@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS room (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     expire_at DATETIME NOT NULL COMMENT '过期时间',
+    allow_member_upload BOOLEAN DEFAULT FALSE COMMENT '是否允许成员上传',
     INDEX idx_code (code),
     INDEX idx_expire_at (expire_at),
     INDEX idx_is_closed (is_closed)
@@ -35,3 +36,16 @@ CREATE TABLE IF NOT EXISTS file_info (
     FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE,
     INDEX idx_room_id (room_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件信息表';
+
+-- 创建房间成员表
+CREATE TABLE IF NOT EXISTS room_member (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '成员ID',
+    room_id BIGINT NOT NULL COMMENT '所属房间ID',
+    device_id VARCHAR(64) NOT NULL COMMENT '设备ID',
+    nickname VARCHAR(50) NOT NULL COMMENT '昵称',
+    joined_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '加入时间',
+    last_active_at DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '最后活跃时间',
+    UNIQUE KEY uk_room_device (room_id, device_id),
+    FOREIGN KEY (room_id) REFERENCES room(id) ON DELETE CASCADE,
+    INDEX idx_room_id (room_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='房间成员表';
