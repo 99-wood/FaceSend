@@ -30,4 +30,20 @@ interface ApiService {
 
     @POST("api/room/close/{roomId}")
     suspend fun closeRoom(@Path("roomId") roomId: Long): ApiResponse<Void>
+
+    @GET("api/room/members/{roomId}")
+    suspend fun getRoomMembers(
+        @Path("roomId") roomId: Long,
+        @Query("deviceId") deviceId: String
+    ): ApiResponse<RoomMembersResponse>
+
+    @POST("api/room/allow-upload/{roomId}")
+    suspend fun setAllowMemberUpload(
+        @Path("roomId") roomId: Long,
+        @Query("deviceId") deviceId: String,
+        @Query("allow") allow: Boolean
+    ): ApiResponse<Void>
+
+    @POST("api/room/member/nickname")
+    suspend fun updateNickname(@Body request: UpdateNicknameRequest): ApiResponse<Void>
 }
