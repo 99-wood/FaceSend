@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  facesend-app:
+    build: .
+    container_name: facesend-server
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - deploy-minimal_facesend-net
+
+networks:
+  deploy-minimal_facesend-net:
+    external: true
