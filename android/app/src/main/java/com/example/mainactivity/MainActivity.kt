@@ -147,6 +147,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 BackHandler(enabled = currentScreen !is Screen.Home) {
+                    // 房主返回时自动关闭房间，避免泄露房间码
                     if (currentScreen is Screen.Room && (currentScreen as Screen.Room).isOwner) {
                         val roomId = (currentScreen as Screen.Room).roomId
                         lifecycleScope.launch {
