@@ -14,6 +14,7 @@ object FileUtils {
     private const val SUB_DIR = "FaceSend"
 
     fun getOutputStream(context: Context, filename: String): OutputStream? {
+        // Android 10+ 强制要求 Scoped Storage，需通过 MediaStore 写入 Downloads 目录
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             return getOutputStreamMediaStore(context, filename)
         }
