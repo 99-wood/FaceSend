@@ -32,6 +32,7 @@ class ProgressRequestBody(
         override fun write(source: okio.Buffer, byteCount: Long) {
             super.write(source, byteCount)
             bytesWritten += byteCount
+            // contentLength 为 -1 时上游不会调用 onProgress，避免除零
             if (totalBytes > 0) {
                 onProgress(bytesWritten.toFloat() / totalBytes.toFloat())
             }
