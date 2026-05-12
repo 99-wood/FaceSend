@@ -10,6 +10,7 @@ spring:
     name: facesend
   servlet:
     multipart:
+      # 单次请求允许的最大体积，覆盖大文件场景
       max-file-size: 10GB
       max-request-size: 10GB
 
