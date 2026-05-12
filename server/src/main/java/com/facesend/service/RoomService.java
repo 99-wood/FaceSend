@@ -42,6 +42,7 @@ public class RoomService {
     private static final Random random = new Random();
 
     private String generateRandomCode() {
+        // 6 位数字码空间 100w，碰撞时重新生成；仍未关闭的房间数远小于该空间
         String code;
         do {
             code = String.format("%06d", random.nextInt(1000000));
